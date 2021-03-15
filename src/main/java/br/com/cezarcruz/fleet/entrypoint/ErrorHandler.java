@@ -20,8 +20,10 @@ public class ErrorHandler {
     final List<ErrorFieldResponse> errorResponses = validationException.getValidationResult()
         .getErrors()
         .stream()
-        .map(error -> ErrorFieldResponse.builder().field(error.getField())
-            .message(error.getMessage()).build())
+        .map(error -> ErrorFieldResponse.builder()
+            .field(error.getField())
+            .message(error.getMessage())
+            .build())
         .collect(Collectors.toList());
 
     final ErrorResponse errorResponse =
