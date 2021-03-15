@@ -4,6 +4,8 @@ package br.com.cezarcruz.fleet.entrypoint;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -13,8 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import br.com.cezarcruz.fleet.entrypoint.mapper.CarMapperImpl;
 import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
 import br.com.cezarcruz.fleet.entrypoint.validator.CarValidator;
+import br.com.cezarcruz.fleet.model.CarModel;
 import br.com.cezarcruz.fleet.usecase.CreateCarUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CreateCarController.class)
-public class CreateCarControllerIT {
+class CreateCarControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
@@ -45,7 +49,8 @@ public class CreateCarControllerIT {
   private CarMapperImpl carMapper;
 
   @Test
-  public void shouldTestInvalidInput() throws Exception {
+  @DisplayName("deve validar todos os inputs enviados para o endpoint /v1/car")
+  void shouldTestInvalidInput() throws Exception {
 
     final CarRequest carRequest = CarRequest.builder().build();
 
@@ -71,9 +76,37 @@ public class CreateCarControllerIT {
   }
 
   @Test
-  public void shouldAcceptValidRequest() throws Exception {
+  @DisplayName("retornar apenas uma validacao do campo mileage")
+  void shouldValidateOneRule() throws Exception {
     final CarRequest carRequest = CarRequest.builder()
-        .mileage(100_000)
+        .model("FORD FIESTA")
+        .plate("CVY1234")
+        .build();
+
+    this.mockMvc.perform(
+        post("/v1/car")
+            .content(objectMapper.writeValueAsString(carRequest))
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+    ).andDo(print())
+        .andExpect(status().is4xxClientError())
+        .andExpect(jsonPath("$.code").value("400"))
+        .andExpect(jsonPath("$.message").value("validation error"))
+        .andExpect(jsonPath("$.fields").isArray())
+        .andExpect(jsonPath("$.fields", hasSize(1)))
+        .andExpect(jsonPath("$.fields[*].message").value(
+            containsInAnyOrder("mileage must be not null")
+        ))
+        .andExpect(jsonPath("$.fields[*].field").value(
+            containsInAnyOrder("mileage")
+        ))
+    ;
+  }
+
+  @Test
+  @DisplayName("deve aceitar todos os campos validos")
+  void shouldAcceptValidRequest() throws Exception {
+    final CarRequest carRequest = CarRequest.builder()
+        .mileage(100)
         .model("FORD FIESTA")
         .plate("CVY1234")
         .build();
@@ -90,6 +123,11 @@ public class CreateCarControllerIT {
         .andExpect(jsonPath("$.mileage").value(carRequest.getMileage()))
         .andExpect(jsonPath("$.model").value(carRequest.getModel()))
     ;
+
+    verify(createCarUseCase, times(1)).create(any());
+    verify(carMapper, times(1)).from(any(CarModel.class));
+    verify(carMapper, times(1)).from(any(CarRequest.class));
+    verify(carValidator, times(1)).validate(any(CarRequest.class));
 
   }
 

@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
 import br.com.cezarcruz.fleet.FleetApplication;
+import br.com.cezarcruz.fleet.SpringBootContextAbstract;
 import br.com.cezarcruz.fleet.fixture.CarModelFixture;
 import br.com.cezarcruz.fleet.gateway.SaveCarGateway;
 import br.com.cezarcruz.fleet.model.CarModel;
@@ -11,6 +12,7 @@ import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
-@DirtiesContext
 @ContextConfiguration(classes = DataProviderConfiguration.class)
-@SpringBootTest(classes = FleetApplication.class)
 @ActiveProfiles("dataprovider")
-public class SaveCarDataProviderIT {
+class SaveCarDataProviderIT extends SpringBootContextAbstract {
 
   @Autowired
   private SaveCarGateway saveCarGateway;
@@ -36,7 +35,8 @@ public class SaveCarDataProviderIT {
   }
 
   @Test
-  public void shouldCreateCarWithSuccess() {
+  @DisplayName("deve validar se o carro foi salvo no banco corretamente")
+  void shouldCreateCarWithSuccess() {
 
     final CarModel carModel = Fixture.from(CarModel.class).gimme(CarModelFixture.VALID_CAR_MODEL);
 

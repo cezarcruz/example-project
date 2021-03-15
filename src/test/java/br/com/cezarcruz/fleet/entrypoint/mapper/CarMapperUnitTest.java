@@ -8,6 +8,7 @@ import br.com.cezarcruz.fleet.fixture.CarRequestFixture;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CarMapperUnitTest {
@@ -19,6 +20,7 @@ public class CarMapperUnitTest {
 
   //TODO this test is so weak
   @Test
+  @DisplayName("deve validar a conversao de CarRequest para CarModel")
   public void shouldConvertRequestToModel() {
 
     final CarRequest carRequest =

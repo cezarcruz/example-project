@@ -1,5 +1,6 @@
 package br.com.cezarcruz.fleet.entrypoint.validator;
 
+import static br.com.fluentvalidator.predicate.ComparablePredicate.greaterThan;
 import static br.com.fluentvalidator.predicate.LogicalPredicate.not;
 import static br.com.fluentvalidator.predicate.ObjectPredicate.nullValue;
 
@@ -17,7 +18,10 @@ public class CarValidator extends AbstractValidator<CarRequest> {
         .must(not(nullValue()))
           .withMessage("mileage must be not null")
           .withFieldName("mileage")
-        .critical();
+        .critical()
+        .must(not(greaterThan(1_000)))
+          .withMessage("mileage must be less than 1000")
+          .withFieldName("mileage");
 
     ruleFor(CarRequest::getPlate)
         .must(not(nullValue()))

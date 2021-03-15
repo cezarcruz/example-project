@@ -36,4 +36,4 @@ Exemplos de testes de integração podem ser encontrados em: SaveCarDataProvider
 
 _mvn clean install_: executa uma nova build da aplicação e gera um novo relatório de cobergura de testes (target/site/jacoco/*.html)
 
-_mvn clean install -DskipTest_: apenas gerar uma nova build, se rodar testes. Necessário em casos de alteração nos mappers
+_mvn clean install -DskipTests_: apenas gerar uma nova build, se rodar testes. Necessário em casos de alteração nos mappers
