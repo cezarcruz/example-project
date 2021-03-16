@@ -110,6 +110,12 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>br.com.six2six</groupId>
       <artifactId>fixture-factory</artifactId>
       <version>${fixture-factory.version}</version>

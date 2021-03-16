@@ -1,6 +1,7 @@
 package br.com.cezarcruz.fleet.entrypoint.mapper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
@@ -28,6 +29,7 @@ public class CarMapperUnitTest {
             .gimme(CarRequestFixture.VALID_CAR_REQUEST);
 
     assertThat(carRequest, notNullValue());
+    assertThat(carRequest.getMileage(), equalTo(123));
   }
 
 }

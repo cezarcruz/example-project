@@ -14,16 +14,16 @@ import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ContextConfiguration(classes = DataProviderConfiguration.class)
 @ActiveProfiles("dataprovider")
+@DirtiesContext
+@SpringBootTest(classes = FleetApplication.class)
 class SaveCarDataProviderIT extends SpringBootContextAbstract {
 
   @Autowired

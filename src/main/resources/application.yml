@@ -29,3 +29,11 @@ spring:
   http:
     encoding:
       force: true
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        loggerLevel: BASIC
