@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CarMapperUnitTest {
+class CarMapperUnitTest {
 
   @BeforeAll
   public static void setUp() {
@@ -22,14 +22,14 @@ public class CarMapperUnitTest {
   //TODO this test is so weak
   @Test
   @DisplayName("deve validar a conversao de CarRequest para CarModel")
-  public void shouldConvertRequestToModel() {
+  void shouldConvertRequestToModel() {
 
     final CarRequest carRequest =
         Fixture.from(CarRequest.class)
             .gimme(CarRequestFixture.VALID_CAR_REQUEST);
 
     assertThat(carRequest, notNullValue());
-    assertThat(carRequest.getMileage(), equalTo(123));
+    assertThat(carRequest.getMileage(), equalTo(100_000));
   }
 
 }
