@@ -188,7 +188,8 @@
         <configuration>
           <append>true</append>
           <excludes>
-            <exclude>br/com/cezarcruz/fleet/aop/**/*</exclude>
+            <exclude>**/*Mapper*</exclude>
+            <exclude>br/com/cezarcruz/fleet/FleetApplication.class</exclude>
           </excludes>
         </configuration>
         <executions>
