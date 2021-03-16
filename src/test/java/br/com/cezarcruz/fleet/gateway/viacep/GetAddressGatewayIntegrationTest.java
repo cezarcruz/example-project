@@ -17,7 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
-class GetAddressGatewayIT extends WiremockIntegrationAbstract {
+class GetAddressGatewayIntegrationTest extends WiremockIntegrationAbstract {
 
   @Autowired
   private WireMockServer wireMockServer;

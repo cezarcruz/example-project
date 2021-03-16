@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-class SaveCarDataProviderIT extends DataBaseIntegrationAbstract {
+class SaveCarDataProviderIntegrationTest extends DataBaseIntegrationAbstract {
 
   @Autowired
   private SaveCarGateway saveCarGateway;

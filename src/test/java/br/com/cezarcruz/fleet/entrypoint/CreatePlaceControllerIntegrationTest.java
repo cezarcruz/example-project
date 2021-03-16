@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CreatePlaceController.class)
-class CreatePlaceControllerIT {
+class CreatePlaceControllerIntegrationTest {
 
   @Autowired
   private MockMvc mockMvc;
