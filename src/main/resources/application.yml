@@ -30,6 +30,9 @@ spring:
     encoding:
       force: true
 
+viacep:
+  url: https://viacep.com.br/ws/
+
 feign:
   hystrix:
     enabled: false

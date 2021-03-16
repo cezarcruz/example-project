@@ -1,9 +1,9 @@
 package br.com.cezarcruz.fleet.gateway.dataprovider;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Profile;
 
-@Configuration
+@TestConfiguration
 @Profile("dataprovider")
 public class DataProviderConfiguration {
 
