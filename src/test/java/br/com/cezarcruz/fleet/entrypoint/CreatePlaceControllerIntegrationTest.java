@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import br.com.cezarcruz.fleet.entrypoint.mapper.AddressMapperImpl;
+import br.com.cezarcruz.fleet.entrypoint.mapper.PlaceMapper;
 import br.com.cezarcruz.fleet.entrypoint.mapper.PlaceMapperImpl;
 import br.com.cezarcruz.fleet.entrypoint.request.AddressRequest;
 import br.com.cezarcruz.fleet.entrypoint.request.CreatePlaceRequest;
@@ -15,42 +16,42 @@ import br.com.cezarcruz.fleet.entrypoint.validator.AddressValidator;
 import br.com.cezarcruz.fleet.entrypoint.validator.PlaceValidator;
 import br.com.cezarcruz.fleet.model.PlaceModel;
 import br.com.cezarcruz.fleet.usecase.CreatePlaceUseCase;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.cezarcruz.fleet.utils.JsonUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(CreatePlaceController.class)
+@ExtendWith(MockitoExtension.class)
 class CreatePlaceControllerIntegrationTest {
 
-  @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private ObjectMapper objectMapper;
+  @InjectMocks
+  private CreatePlaceController controller;
 
-  @SpyBean
-  private PlaceMapperImpl placeMapper;
+  @Spy
+  private final PlaceMapper placeMapper = new PlaceMapperImpl(new AddressMapperImpl());
 
-  @SpyBean
-  private PlaceValidator placeValidator;
+  @Spy
+  private final PlaceValidator placeValidator = new PlaceValidator(new AddressValidator());
 
-  @SpyBean
-  private AddressMapperImpl addressMapper;
-
-  @SpyBean
-  private AddressValidator addressValidator;
-
-  @MockBean
+  @Mock
   private CreatePlaceUseCase createPlaceUseCase;
+
+  @BeforeEach
+  public void setup() {
+    mockMvc = MockMvcBuilders.standaloneSetup(controller)
+        .setControllerAdvice(new ErrorHandler())
+        .build();
+  }
 
   @Test
   @DisplayName("deve aceitar a requisicao para criar um novo local")
@@ -73,7 +74,7 @@ class CreatePlaceControllerIntegrationTest {
 
     this.mockMvc.perform(post("/v1/place")
         .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(objectMapper.writeValueAsString(placeRequest))
+        .content(JsonUtils.jsonFrom(placeRequest))
     ).andDo(print())
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.description").value("just another place"))
@@ -85,7 +86,7 @@ class CreatePlaceControllerIntegrationTest {
   void shouldRejectInvalidFields() throws Exception {
     this.mockMvc.perform(post("/v1/place")
         .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(objectMapper.writeValueAsString(CreatePlaceRequest.builder().build()))
+        .content(JsonUtils.jsonFrom(CreatePlaceRequest.builder().build()))
     ).andDo(print())
         .andExpect(status().isBadRequest())
     ;

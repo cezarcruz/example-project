@@ -4,11 +4,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-import br.com.cezarcruz.fleet.gateway.feing.viacep.ViaCepFeingClient;
-import br.com.cezarcruz.fleet.gateway.json.ViaCepResponse;
+import br.com.cezarcruz.fleet.gateway.GetAddressGateway;
+import br.com.cezarcruz.fleet.model.AddressModel;
 import br.com.cezarcruz.fleet.utils.WiremockIntegrationAbstract;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
+import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class GetAddressGatewayIntegrationTest extends WiremockIntegrationAbstract {
   private WireMockServer wireMockServer;
 
   @Autowired
-  private ViaCepFeingClient viaCepFeingClient;
+  private GetAddressGateway getAddressGateway;
 
   @AfterEach
   void afterEach() {
@@ -55,11 +56,13 @@ class GetAddressGatewayIntegrationTest extends WiremockIntegrationAbstract {
             )
     );
 
-    final ViaCepResponse viaCepResponse = viaCepFeingClient.getBy("13188021");
+    final Optional<AddressModel> responseOptional = getAddressGateway.get("13188021");
 
-    assertThat(viaCepResponse, notNullValue());
-    assertThat(viaCepResponse.getCep(), is("01001-000"));
-    assertThat(viaCepResponse.getLocalidade(), is("São Paulo"));
+    assertThat(responseOptional, notNullValue());
+    assertThat(responseOptional.isPresent(), is(true));
+
+    assertThat(responseOptional.get().getCep(), is("01001-000"));
+    assertThat(responseOptional.get().getCity(), is("São Paulo"));
 
   }
 

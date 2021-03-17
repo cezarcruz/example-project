@@ -12,38 +12,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import br.com.cezarcruz.fleet.entrypoint.mapper.CarMapper;
 import br.com.cezarcruz.fleet.entrypoint.mapper.CarMapperImpl;
 import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
 import br.com.cezarcruz.fleet.entrypoint.validator.CarValidator;
 import br.com.cezarcruz.fleet.model.CarModel;
 import br.com.cezarcruz.fleet.usecase.CreateCarUseCase;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.cezarcruz.fleet.utils.JsonUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@WebMvcTest(CreateCarController.class)
+@ExtendWith(MockitoExtension.class)
 class CreateCarControllerIntegrationTest {
 
-  @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
-  @MockBean
+  @Mock
   private CreateCarUseCase createCarUseCase;
 
-  @SpyBean
-  private CarValidator carValidator;
+  @Spy
+  private final CarValidator carValidator = new CarValidator();
 
-  @SpyBean
-  private CarMapperImpl carMapper;
+  @Spy
+  private final CarMapper carMapper = new CarMapperImpl();
+
+  @InjectMocks
+  private CreateCarController createCarController;
+
+  @BeforeEach
+  public void setup() {
+    mockMvc = MockMvcBuilders.standaloneSetup(createCarController)
+        .setControllerAdvice(new ErrorHandler())
+        .build();
+  }
 
   @Test
   @DisplayName("deve validar todos os inputs enviados para o endpoint /v1/car")
@@ -53,7 +63,7 @@ class CreateCarControllerIntegrationTest {
 
     this.mockMvc.perform(
         post("/v1/car")
-            .content(objectMapper.writeValueAsString(carRequest))
+            .content(JsonUtils.jsonFrom(carRequest))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
     ).andDo(print())
         .andExpect(status().is4xxClientError())
@@ -82,8 +92,9 @@ class CreateCarControllerIntegrationTest {
 
     this.mockMvc.perform(
         post("/v1/car")
-            .content(objectMapper.writeValueAsString(carRequest))
+            .content(JsonUtils.jsonFrom(carRequest))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .characterEncoding("utf-8")
     ).andDo(print())
         .andExpect(status().is4xxClientError())
         .andExpect(jsonPath("$.code").value("400"))
@@ -97,23 +108,29 @@ class CreateCarControllerIntegrationTest {
             containsInAnyOrder("mileage")
         ))
     ;
+
+    verify(carMapper, times(0)).from(any(CarModel.class));
+    verify(carMapper, times(0)).from(any(CarRequest.class));
+    verify(carValidator, times(1)).validate(any(CarRequest.class));
   }
 
   @Test
   @DisplayName("deve aceitar todos os campos validos")
   void shouldAcceptValidRequest() throws Exception {
+
     final CarRequest carRequest = CarRequest.builder()
         .mileage(100)
         .model("FORD FIESTA")
         .plate("CVY1234")
         .build();
 
-    when(createCarUseCase.create(any()))
-        .thenAnswer( a -> a.getArgument(0));
+    when(createCarUseCase.create(any(CarModel.class)))
+        .thenAnswer(a -> a.getArgument(0));
 
     this.mockMvc.perform(post("/v1/car")
         .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(objectMapper.writeValueAsString(carRequest))
+        .content(JsonUtils.jsonFrom(carRequest))
+        .characterEncoding("utf-8")
     ).andDo(print())
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.plate").value(carRequest.getPlate()))
