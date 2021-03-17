@@ -45,3 +45,7 @@ management:
   endpoint:
     info:
       enabled: true
+
+logging:
+  level:
+    br.com.cezarcruz.fleet: DEBUG
