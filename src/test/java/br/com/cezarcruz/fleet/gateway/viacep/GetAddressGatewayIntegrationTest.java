@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 import br.com.cezarcruz.fleet.gateway.GetAddressGateway;
-import br.com.cezarcruz.fleet.model.AddressModel;
+import br.com.cezarcruz.fleet.core.model.AddressModel;
 import br.com.cezarcruz.fleet.utils.WiremockIntegrationAbstract;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;

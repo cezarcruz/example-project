@@ -1,7 +1,7 @@
 package br.com.cezarcruz.fleet.gateway.dataprovider.mapper;
 
 import br.com.cezarcruz.fleet.gateway.dataprovider.entity.PlaceEntity;
-import br.com.cezarcruz.fleet.model.PlaceModel;
+import br.com.cezarcruz.fleet.core.model.PlaceModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 

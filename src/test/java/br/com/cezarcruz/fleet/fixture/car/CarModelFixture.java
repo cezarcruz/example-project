@@ -1,6 +1,6 @@
 package br.com.cezarcruz.fleet.fixture.car;
 
-import br.com.cezarcruz.fleet.model.CarModel;
+import br.com.cezarcruz.fleet.core.model.CarModel;
 
 
 public class CarModelFixture {

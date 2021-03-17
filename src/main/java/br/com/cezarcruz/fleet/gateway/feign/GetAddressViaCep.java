@@ -4,7 +4,7 @@ import br.com.cezarcruz.fleet.gateway.GetAddressGateway;
 import br.com.cezarcruz.fleet.gateway.feign.mapper.ViaCepMapper;
 import br.com.cezarcruz.fleet.gateway.feign.viacep.ViaCepFeignClient;
 import br.com.cezarcruz.fleet.gateway.json.ViaCepResponse;
-import br.com.cezarcruz.fleet.model.AddressModel;
+import br.com.cezarcruz.fleet.core.model.AddressModel;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

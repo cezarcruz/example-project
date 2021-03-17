@@ -8,8 +8,8 @@ import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.AddressEntityMapper;
 import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.PlaceEntityMapper;
 import br.com.cezarcruz.fleet.gateway.dataprovider.repository.AddressRepository;
 import br.com.cezarcruz.fleet.gateway.dataprovider.repository.PlaceRepository;
-import br.com.cezarcruz.fleet.model.AddressModel;
-import br.com.cezarcruz.fleet.model.PlaceModel;
+import br.com.cezarcruz.fleet.core.model.AddressModel;
+import br.com.cezarcruz.fleet.core.model.PlaceModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

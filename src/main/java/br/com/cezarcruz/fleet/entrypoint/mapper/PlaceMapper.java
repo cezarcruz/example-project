@@ -2,7 +2,7 @@ package br.com.cezarcruz.fleet.entrypoint.mapper;
 
 import br.com.cezarcruz.fleet.entrypoint.request.CreatePlaceRequest;
 import br.com.cezarcruz.fleet.entrypoint.response.PlaceResponse;
-import br.com.cezarcruz.fleet.model.PlaceModel;
+import br.com.cezarcruz.fleet.core.model.PlaceModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 

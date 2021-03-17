@@ -1,7 +1,7 @@
-package br.com.cezarcruz.fleet.usecase;
+package br.com.cezarcruz.fleet.core.usecase;
 
 import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
-import br.com.cezarcruz.fleet.model.CarModel;
+import br.com.cezarcruz.fleet.core.model.CarModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

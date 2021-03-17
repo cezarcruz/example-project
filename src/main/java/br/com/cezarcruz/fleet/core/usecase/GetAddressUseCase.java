@@ -1,7 +1,7 @@
-package br.com.cezarcruz.fleet.usecase;
+package br.com.cezarcruz.fleet.core.usecase;
 
 import br.com.cezarcruz.fleet.gateway.GetAddressGateway;
-import br.com.cezarcruz.fleet.model.AddressModel;
+import br.com.cezarcruz.fleet.core.model.AddressModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

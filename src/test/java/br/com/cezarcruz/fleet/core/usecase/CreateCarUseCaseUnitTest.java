@@ -1,4 +1,4 @@
-package br.com.cezarcruz.fleet.usecase;
+package br.com.cezarcruz.fleet.core.usecase;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 import br.com.cezarcruz.fleet.fixture.car.CarModelFixture;
 import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
-import br.com.cezarcruz.fleet.model.CarModel;
+import br.com.cezarcruz.fleet.core.model.CarModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

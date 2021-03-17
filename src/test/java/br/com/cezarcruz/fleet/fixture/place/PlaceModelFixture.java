@@ -1,6 +1,6 @@
 package br.com.cezarcruz.fleet.fixture.place;
 
-import br.com.cezarcruz.fleet.model.PlaceModel;
+import br.com.cezarcruz.fleet.core.model.PlaceModel;
 
 public class PlaceModelFixture {
 

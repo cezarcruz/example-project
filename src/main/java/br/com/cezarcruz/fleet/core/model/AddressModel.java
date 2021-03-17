@@ -1,4 +1,4 @@
-package br.com.cezarcruz.fleet.model;
+package br.com.cezarcruz.fleet.core.model;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package br.com.cezarcruz.fleet.entrypoint.mapper;
 
 import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
 import br.com.cezarcruz.fleet.entrypoint.response.CarResponse;
-import br.com.cezarcruz.fleet.model.CarModel;
+import br.com.cezarcruz.fleet.core.model.CarModel;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

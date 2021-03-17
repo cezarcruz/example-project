@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import br.com.cezarcruz.fleet.fixture.car.CarModelFixture;
 import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
 import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.CarEntityMapperImpl;
-import br.com.cezarcruz.fleet.model.CarModel;
+import br.com.cezarcruz.fleet.core.model.CarModel;
 import br.com.cezarcruz.fleet.utils.DataBaseIntegrationAbstract;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.DisplayName;

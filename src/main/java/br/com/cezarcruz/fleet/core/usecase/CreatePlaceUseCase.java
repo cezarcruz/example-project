@@ -1,9 +1,9 @@
-package br.com.cezarcruz.fleet.usecase;
+package br.com.cezarcruz.fleet.core.usecase;
 
 import br.com.cezarcruz.fleet.gateway.CreateAddressGateway;
 import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
-import br.com.cezarcruz.fleet.model.AddressModel;
-import br.com.cezarcruz.fleet.model.PlaceModel;
+import br.com.cezarcruz.fleet.core.model.AddressModel;
+import br.com.cezarcruz.fleet.core.model.PlaceModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
