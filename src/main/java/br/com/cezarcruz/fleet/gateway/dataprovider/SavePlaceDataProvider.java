@@ -38,8 +38,7 @@ public class SavePlaceDataProvider implements CreateAddressGateway, CreatePlaceG
     final AddressModel savedAddress = create(placeModel.getAddress());
 
     final PlaceEntity placeEntity = placeMapper
-        .fromModel(placeModel.toBuilder().address(savedAddress)
-            .build());
+        .fromModel(placeModel.toBuilder().address(savedAddress).build());
 
     final PlaceEntity savedPlace = placeRepository.save(placeEntity);
 

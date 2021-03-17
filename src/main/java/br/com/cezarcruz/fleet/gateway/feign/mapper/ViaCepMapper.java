@@ -1,4 +1,4 @@
-package br.com.cezarcruz.fleet.gateway.feing.mapper;
+package br.com.cezarcruz.fleet.gateway.feign.mapper;
 
 import br.com.cezarcruz.fleet.gateway.json.ViaCepResponse;
 import br.com.cezarcruz.fleet.model.AddressModel;
