@@ -3,10 +3,10 @@ package br.com.cezarcruz.fleet.gateway.dataprovider;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
+import br.com.cezarcruz.fleet.fixture.place.PlaceModelFixture;
 import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
 import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.AddressEntityMapperImpl;
 import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.PlaceEntityMapperImpl;
-import br.com.cezarcruz.fleet.model.AddressModel;
 import br.com.cezarcruz.fleet.model.PlaceModel;
 import br.com.cezarcruz.fleet.utils.DataBaseIntegrationAbstract;
 import org.junit.jupiter.api.Test;
@@ -22,11 +22,7 @@ class SavePlaceDataProviderIntegrationTest extends DataBaseIntegrationAbstract {
   @Test
   void shouldSavePlace() {
     final PlaceModel placeModel =
-        createPlaceGateway.create(
-            PlaceModel.builder()
-                .address(
-                    AddressModel.builder().build()
-                ).build());
+        createPlaceGateway.create(PlaceModelFixture.getValidaWithAddress());
 
     assertThat(placeModel, notNullValue());
     assertThat(placeModel.getId(), notNullValue());

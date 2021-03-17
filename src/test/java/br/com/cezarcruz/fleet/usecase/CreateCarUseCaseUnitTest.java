@@ -7,12 +7,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import br.com.cezarcruz.fleet.fixture.CarModelFixture;
+import br.com.cezarcruz.fleet.fixture.car.CarModelFixture;
 import br.com.cezarcruz.fleet.gateway.SaveCarGateway;
 import br.com.cezarcruz.fleet.model.CarModel;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,15 +26,12 @@ class CreateCarUseCaseUnitTest {
   @Mock
   private SaveCarGateway saveCarGateway;
 
-  @BeforeAll
-  public static void setUp() {
-    FixtureFactoryLoader.loadTemplates("br.com.cezarcruz.fleet.fixture");
-  }
 
   @Test
   @DisplayName("deve validar se o use case createCarUseCase contem as regras de negocio validas")
   void shouldCreateCar() {
-    final CarModel carModel = Fixture.from(CarModel.class).gimme(CarModelFixture.VALID_CAR_MODEL);
+
+    final CarModel carModel = CarModelFixture.validCarModel();
 
     when(saveCarGateway.save(carModel)).thenReturn(carModel);
 

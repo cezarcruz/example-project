@@ -14,6 +14,8 @@ import br.com.cezarcruz.fleet.entrypoint.request.AddressRequest;
 import br.com.cezarcruz.fleet.entrypoint.request.CreatePlaceRequest;
 import br.com.cezarcruz.fleet.entrypoint.validator.AddressValidator;
 import br.com.cezarcruz.fleet.entrypoint.validator.PlaceValidator;
+import br.com.cezarcruz.fleet.fixture.place.AddressRequestFixture;
+import br.com.cezarcruz.fleet.fixture.place.PlaceRequestFixture;
 import br.com.cezarcruz.fleet.model.PlaceModel;
 import br.com.cezarcruz.fleet.usecase.CreatePlaceUseCase;
 import br.com.cezarcruz.fleet.utils.JsonUtils;
@@ -57,20 +59,11 @@ class CreatePlaceControllerIntegrationTest {
   @DisplayName("deve aceitar a requisicao para criar um novo local")
   void shouldAcceptValidInput() throws Exception {
 
-    final AddressRequest address =
-        AddressRequest.builder()
-            .cep("13188023")
-            .complement("Somewhere in time")
-            .number("123A")
-            .build();
+    final AddressRequest address = AddressRequestFixture.getValidAddress();
+    final CreatePlaceRequest placeRequest = PlaceRequestFixture.getPlaceWithAddress(address);
 
-    final CreatePlaceRequest placeRequest =
-        CreatePlaceRequest.builder()
-            .description("just another place")
-            .address(address)
-            .build();
-
-    when(createPlaceUseCase.execute(any())).thenAnswer(a -> ((PlaceModel) a.getArgument(0)).toBuilder().id(1L).build());
+    when(createPlaceUseCase.execute(any()))
+        .thenAnswer(a -> ((PlaceModel) a.getArgument(0)).toBuilder().id(1L).build());
 
     this.mockMvc.perform(post("/v1/place")
         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -86,7 +79,7 @@ class CreatePlaceControllerIntegrationTest {
   void shouldRejectInvalidFields() throws Exception {
     this.mockMvc.perform(post("/v1/place")
         .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(JsonUtils.jsonFrom(CreatePlaceRequest.builder().build()))
+        .content(JsonUtils.jsonFrom(PlaceRequestFixture.getEmpty()))
     ).andDo(print())
         .andExpect(status().isBadRequest())
     ;

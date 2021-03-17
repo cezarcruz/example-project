@@ -16,6 +16,7 @@ import br.com.cezarcruz.fleet.entrypoint.mapper.CarMapper;
 import br.com.cezarcruz.fleet.entrypoint.mapper.CarMapperImpl;
 import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
 import br.com.cezarcruz.fleet.entrypoint.validator.CarValidator;
+import br.com.cezarcruz.fleet.fixture.car.CarRequestFixture;
 import br.com.cezarcruz.fleet.model.CarModel;
 import br.com.cezarcruz.fleet.usecase.CreateCarUseCase;
 import br.com.cezarcruz.fleet.utils.JsonUtils;
@@ -59,7 +60,7 @@ class CreateCarControllerIntegrationTest {
   @DisplayName("deve validar todos os inputs enviados para o endpoint /v1/car")
   void shouldTestInvalidInput() throws Exception {
 
-    final CarRequest carRequest = CarRequest.builder().build();
+    final CarRequest carRequest = CarRequestFixture.getEmpty();
 
     this.mockMvc.perform(
         post("/v1/car")
@@ -85,10 +86,7 @@ class CreateCarControllerIntegrationTest {
   @Test
   @DisplayName("retornar apenas uma validacao do campo mileage")
   void shouldValidateOneRule() throws Exception {
-    final CarRequest carRequest = CarRequest.builder()
-        .model("FORD FIESTA")
-        .plate("CVY1234")
-        .build();
+    final CarRequest carRequest = CarRequestFixture.getCarWithoutMileage();
 
     this.mockMvc.perform(
         post("/v1/car")
@@ -118,11 +116,7 @@ class CreateCarControllerIntegrationTest {
   @DisplayName("deve aceitar todos os campos validos")
   void shouldAcceptValidRequest() throws Exception {
 
-    final CarRequest carRequest = CarRequest.builder()
-        .mileage(100)
-        .model("FORD FIESTA")
-        .plate("CVY1234")
-        .build();
+    final CarRequest carRequest = CarRequestFixture.getValidCarRequest();
 
     when(createCarUseCase.create(any(CarModel.class)))
         .thenAnswer(a -> a.getArgument(0));

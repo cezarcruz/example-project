@@ -6,6 +6,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import br.com.cezarcruz.fleet.fixture.place.AddressModelFixture;
+import br.com.cezarcruz.fleet.fixture.place.PlaceModelFixture;
 import br.com.cezarcruz.fleet.gateway.CreateAddressGateway;
 import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
 import br.com.cezarcruz.fleet.model.AddressModel;
@@ -35,7 +37,7 @@ class CreatePlaceUseCaseTest {
   void shouldCreatePlaceSuccessfully() {
 
     when(getAddressUseCase.getAddress(anyString()))
-        .thenReturn(AddressModel.builder().build());
+        .thenReturn(AddressModelFixture.getValidAddress());
 
     when(createAddressGateway.create(any(AddressModel.class)))
         .thenAnswer(a -> a.getArgument(0));
@@ -44,7 +46,7 @@ class CreatePlaceUseCaseTest {
         .thenAnswer(a -> a.getArgument(0));
 
     final PlaceModel placeModel = createPlaceUseCase
-        .execute(PlaceModel.builder().address(AddressModel.builder().cep("12312354").build()).build());
+        .execute(PlaceModelFixture.getValidaWithAddress());
 
     assertThat(placeModel, notNullValue());
 
