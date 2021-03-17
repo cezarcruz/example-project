@@ -40,3 +40,8 @@ feign:
     config:
       default:
         loggerLevel: BASIC
+
+management:
+  endpoint:
+    info:
+      enabled: true
