@@ -1,6 +1,6 @@
 package br.com.cezarcruz.fleet.gateway.dataprovider;
 
-import br.com.cezarcruz.fleet.gateway.SaveCarGateway;
+import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
 import br.com.cezarcruz.fleet.gateway.dataprovider.entity.CarEntity;
 import br.com.cezarcruz.fleet.gateway.dataprovider.mapper.CarEntityMapper;
 import br.com.cezarcruz.fleet.gateway.dataprovider.repository.CarRepository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class SaveCarDataProvider implements SaveCarGateway {
+public class CreateCarDataProvider implements CreateCarGateway {
 
   private final CarRepository carRepository;
   private final CarEntityMapper carEntityMapper;

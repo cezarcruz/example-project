@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import br.com.cezarcruz.fleet.fixture.car.CarModelFixture;
-import br.com.cezarcruz.fleet.gateway.SaveCarGateway;
+import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
 import br.com.cezarcruz.fleet.model.CarModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class CreateCarUseCaseUnitTest {
   private CreateCarUseCase createCarUseCase;
 
   @Mock
-  private SaveCarGateway saveCarGateway;
+  private CreateCarGateway createCarGateway;
 
 
   @Test
@@ -33,13 +33,13 @@ class CreateCarUseCaseUnitTest {
 
     final CarModel carModel = CarModelFixture.validCarModel();
 
-    when(saveCarGateway.save(carModel)).thenReturn(carModel);
+    when(createCarGateway.save(carModel)).thenReturn(carModel);
 
     final CarModel createdCar = createCarUseCase.create(carModel);
     assertThat(createdCar, notNullValue());
 
-    verify(saveCarGateway, times(1)).save(carModel);
-    verifyNoMoreInteractions(saveCarGateway);
+    verify(createCarGateway, times(1)).save(carModel);
+    verifyNoMoreInteractions(createCarGateway);
 
   }
 
