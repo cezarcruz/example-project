@@ -1,16 +1,24 @@
 package br.com.cezarcruz.fleet.utils;
 
-import br.com.cezarcruz.fleet.FleetApplication;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import org.junit.jupiter.api.AfterEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.test.context.ContextConfiguration;
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureWireMock(port = 9005)
-@ContextConfiguration(classes = FleetApplication.class)
+@AutoConfigureWireMock(port = 0)
 public class ComponentAbstract {
+
+  @Autowired
+  protected WireMockServer wireMockServer;
+
+  @AfterEach
+  void afterEach() {
+    wireMockServer.resetAll();
+  }
 
 }

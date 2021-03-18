@@ -11,4 +11,4 @@ spring:
     hibernate.ddl-auto: update
 
 viacep:
-  url: http://localhost:9005/ws/
+  url: http://localhost:${wiremock.server.port}/ws/
