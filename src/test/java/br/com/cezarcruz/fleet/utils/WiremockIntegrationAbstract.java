@@ -4,7 +4,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
 @AutoConfigureWireMock(port = 9005)
-@SpringBootTest(properties = "spring.main.lazy-initialization=true")
+@SpringBootTest
 public class WiremockIntegrationAbstract extends SpringIntegrationTest {
 
 }
