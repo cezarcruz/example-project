@@ -1,0 +1,17 @@
+version: '3'
+services:
+  docker-app:
+    image: fleet:lastest
+    build:
+      context: ../
+      dockerfile: devops/Dockerfile
+    container_name: fleet-app
+    ports:
+      - "8090:8080"
+    environment:
+      - ENV=default
+  docker-db:
+    image: mysql:latest
+    container_name: docker-db
+    ports:
+      - "3306:3306"
