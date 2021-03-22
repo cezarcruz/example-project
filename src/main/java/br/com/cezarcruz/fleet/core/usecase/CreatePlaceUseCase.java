@@ -5,6 +5,7 @@ import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
 import br.com.cezarcruz.fleet.core.model.AddressModel;
 import br.com.cezarcruz.fleet.core.model.PlaceModel;
 import lombok.AllArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +16,7 @@ public class CreatePlaceUseCase {
   private final CreateAddressGateway createAddressGateway;
   private final CreatePlaceGateway createPlaceGateway;
 
-  public PlaceModel execute(final PlaceModel placeModel) {
+  public PlaceModel execute(@NonNull final PlaceModel placeModel) {
 
     final AddressModel address = getAddressUseCase.
         getAddress(placeModel.getAddress().getCep());
