@@ -1,3 +1,5 @@
+![Coverage](.github/badges/jacoco.svg)
+
 Esse projeto contem exemplos uteis para o dia a dia.
 
 Para subir a aplicação, executar o Método main em FleetApplication.java.
