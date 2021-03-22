@@ -1,12 +1,15 @@
 package br.com.cezarcruz.fleet.core.usecase;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import br.com.cezarcruz.fleet.core.model.CarStatus;
 import br.com.cezarcruz.fleet.fixture.car.CarModelFixture;
 import br.com.cezarcruz.fleet.gateway.CreateCarGateway;
 import br.com.cezarcruz.fleet.core.model.CarModel;
@@ -26,19 +29,20 @@ class CreateCarUseCaseUnitTest {
   @Mock
   private CreateCarGateway createCarGateway;
 
-
   @Test
   @DisplayName("deve validar se o use case createCarUseCase contem as regras de negocio validas")
   void shouldCreateCar() {
 
     final CarModel carModel = CarModelFixture.validCarModel();
 
-    when(createCarGateway.save(carModel)).thenReturn(carModel);
+    when(createCarGateway.save(any()))
+        .thenAnswer(a -> a.getArgument(0));
 
     final CarModel createdCar = createCarUseCase.create(carModel);
     assertThat(createdCar, notNullValue());
+    assertThat(createdCar.getStatus(), is(CarStatus.CREATED));
 
-    verify(createCarGateway, times(1)).save(carModel);
+    verify(createCarGateway, times(1)).save(any());
     verifyNoMoreInteractions(createCarGateway);
 
   }

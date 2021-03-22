@@ -26,7 +26,8 @@ class GetAddressUseCaseUnitTest {
   @Test
   void shouldNotFindAnAddress() {
 
-    when(getAddressGateway.get("12312312")).thenReturn(Optional.empty());
+    when(getAddressGateway.get("12312312"))
+        .thenReturn(Optional.empty());
 
     assertThrows(RuntimeException.class, () -> {
       getAddressUseCase.getAddress("12312312");

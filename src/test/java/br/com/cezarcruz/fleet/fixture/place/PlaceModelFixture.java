@@ -4,7 +4,7 @@ import br.com.cezarcruz.fleet.core.model.PlaceModel;
 
 public class PlaceModelFixture {
 
-  public static PlaceModel getValidaWithAddress() {
+  public static PlaceModel getValidWithAddress() {
     return PlaceModel.builder()
         .address(AddressModelFixture.getValidAddress())
         .description("1h from here")

@@ -46,7 +46,7 @@ class CreatePlaceUseCaseTest {
         .thenAnswer(a -> a.getArgument(0));
 
     final PlaceModel placeModel = createPlaceUseCase
-        .execute(PlaceModelFixture.getValidaWithAddress());
+        .execute(PlaceModelFixture.getValidWithAddress());
 
     assertThat(placeModel, notNullValue());
 

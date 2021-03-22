@@ -9,6 +9,7 @@ import br.com.cezarcruz.fleet.entrypoint.request.CarRequest;
 import br.com.cezarcruz.fleet.fixture.car.CarRequestFixture;
 import br.com.cezarcruz.fleet.utils.ComponentAbstract;
 import br.com.cezarcruz.fleet.utils.JsonUtils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,7 +21,8 @@ class CarComponentTest extends ComponentAbstract {
   private MockMvc mockMvc;
 
   @Test
-  void shouldValidateSomething() throws Exception {
+  @DisplayName("deve criar um carro")
+  void shouldCreateCarSuccessfully() throws Exception {
     final CarRequest carRequest = CarRequestFixture.getValidCarRequest();
 
     this.mockMvc.perform(post("/v1/car")
@@ -32,6 +34,7 @@ class CarComponentTest extends ComponentAbstract {
         .andExpect(jsonPath("$.plate").value(carRequest.getPlate()))
         .andExpect(jsonPath("$.mileage").value(carRequest.getMileage()))
         .andExpect(jsonPath("$.model").value(carRequest.getModel()))
+        .andExpect(jsonPath("$.status").value("created"))
     ;
   }
 

@@ -18,4 +18,5 @@ public class CarModel {
   private String plate;
   private Integer mileage;
   private String model;
+  private CarStatus status;
 }

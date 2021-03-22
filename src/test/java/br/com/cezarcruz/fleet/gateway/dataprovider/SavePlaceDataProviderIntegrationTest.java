@@ -18,7 +18,7 @@ class SavePlaceDataProviderIntegrationTest extends DataBaseIntegrationAbstract {
   @Test
   void shouldSavePlace() {
     final PlaceModel placeModel =
-        createPlaceGateway.create(PlaceModelFixture.getValidaWithAddress());
+        createPlaceGateway.create(PlaceModelFixture.getValidWithAddress());
 
     assertThat(placeModel, notNullValue());
     assertThat(placeModel.getId(), notNullValue());

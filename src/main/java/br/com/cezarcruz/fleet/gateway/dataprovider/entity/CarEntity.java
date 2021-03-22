@@ -25,4 +25,6 @@ public class CarEntity {
   private Integer mileage;
 
   private String model;
+
+  private String status;
 }
