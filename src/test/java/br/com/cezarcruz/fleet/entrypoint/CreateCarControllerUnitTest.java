@@ -47,8 +47,8 @@ class CreateCarControllerUnitTest {
   private CreateCarController createCarController;
 
   @Test
-  @DisplayName("deve validar todos os inputs enviados para o endpoint /v1/car")
-  void shouldTestInvalidInput() throws Exception {
+  @DisplayName("deve validar todos os inputs enviados")
+  void shouldTestInvalidInput() {
 
     final CarRequest carRequest = CarRequestFixture.getEmpty();
 
@@ -71,7 +71,7 @@ class CreateCarControllerUnitTest {
 
   @Test
   @DisplayName("retornar apenas uma validacao do campo mileage")
-  void shouldValidateOneRule() throws Exception {
+  void shouldValidateOneRule() {
     final CarRequest carRequest = CarRequestFixture.getCarWithoutMileage();
 
     final ValidateException validateException = assertThrows(ValidateException.class, () -> {
@@ -93,7 +93,7 @@ class CreateCarControllerUnitTest {
 
   @Test
   @DisplayName("deve aceitar todos os campos validos")
-  void shouldAcceptValidRequest() throws Exception {
+  void shouldAcceptValidRequest() {
 
     final CarRequest carRequest = CarRequestFixture.getValidCarRequest();
 

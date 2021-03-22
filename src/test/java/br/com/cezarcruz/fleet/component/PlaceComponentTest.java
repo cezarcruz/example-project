@@ -34,18 +34,7 @@ class PlaceComponentTest extends ComponentAbstract {
             .willReturn(
                 WireMock.aResponse()
                     .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                    .withBody("{"
-                        + "  \"cep\": \"01001-000\","
-                        + "  \"logradouro\": \"Praça da Sé\","
-                        + "  \"complemento\": \"lado ímpar\","
-                        + "  \"bairro\": \"Sé\","
-                        + "  \"localidade\": \"São Paulo\","
-                        + "  \"uf\": \"SP\","
-                        + "  \"ibge\": \"3550308\","
-                        + "  \"gia\": \"1004\","
-                        + "  \"ddd\": \"11\","
-                        + "  \"siafi\": \"7107\""
-                        + "}")
+                    .withBodyFile("wiremock/viacep/cep-01001000-success.json")
             )
     );
 
