@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class ErrorFieldResponse {
   private String field;
+  private String value;
   private String message;
 }

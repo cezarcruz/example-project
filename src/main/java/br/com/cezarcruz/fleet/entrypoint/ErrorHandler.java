@@ -5,6 +5,7 @@ import br.com.cezarcruz.fleet.entrypoint.response.ErrorFieldResponse;
 import br.com.cezarcruz.fleet.entrypoint.response.ErrorResponse;
 import br.com.fluentvalidator.exception.ValidationException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,7 @@ public class ErrorHandler {
         .map(error -> ErrorFieldResponse.builder()
             .field(error.getField())
             .message(error.getMessage())
+            .value(Objects.toString(error.getAttemptedValue(), ""))
             .build())
         .collect(Collectors.toList());
 

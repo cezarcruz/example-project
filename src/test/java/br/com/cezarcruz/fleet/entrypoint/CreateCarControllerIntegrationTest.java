@@ -80,6 +80,9 @@ class CreateCarControllerIntegrationTest {
         .andExpect(jsonPath("$.fields[*].field").value(
             containsInAnyOrder("mileage", "model", "plate")
         ))
+        .andExpect(jsonPath("$.fields[*].value").value(
+            containsInAnyOrder("", "", "")
+        ))
     ;
   }
 
