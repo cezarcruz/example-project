@@ -4,8 +4,8 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public enum CarStatus {
 
   ACTIVE(1, "active"),

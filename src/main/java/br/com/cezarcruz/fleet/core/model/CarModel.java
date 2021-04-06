@@ -1,25 +1,19 @@
 package br.com.cezarcruz.fleet.core.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
-@Builder(toBuilder = true)
 @EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
+@Builder(toBuilder = true)
 public class CarModel {
-  private Long id;
-  private String plate;
-  private Integer mileage;
-  private String model;
-  private PlaceModel actualPlace;
-  private CarStatus status;
+  private final Long id;
+  private final String plate;
+  private final Integer mileage;
+  private final String model;
+  private final PlaceModel actualPlace;
+  private final CarStatus status;
 }

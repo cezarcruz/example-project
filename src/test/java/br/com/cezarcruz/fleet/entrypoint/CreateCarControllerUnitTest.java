@@ -100,8 +100,7 @@ class CreateCarControllerUnitTest {
     when(createCarUseCase.create(any(CarModel.class)))
         .thenAnswer(a -> {
           final CarModel argument = a.getArgument(0);
-          argument.setStatus(CarStatus.CREATED);
-          return argument;
+          return argument.toBuilder().status(CarStatus.CREATED).build();
         });
 
     final ResponseEntity<CarResponse> carResponseResponseEntity
