@@ -19,10 +19,11 @@ public class MoveCarDataProvider implements MoveCarGateway {
   private final CarEntityMapper carEntityMapper;
 
   @Override
-  public CarModel move(final String plate, final Long placeId) {
+  public CarModel move(final CarModel carModel) {
 
-    final PlaceEntity place = getPlace(placeId);
-    final CarEntity car = getCar(plate);
+    //TODO refactor
+    final PlaceEntity place = getPlace(carModel.getActualPlace().getId());
+    final CarEntity car = getCar(carModel.getPlate());
 
     final CarEntity carWithPlace = car.toBuilder().actualPlace(place).build();
     final CarEntity savedCar = saveCar(carWithPlace);

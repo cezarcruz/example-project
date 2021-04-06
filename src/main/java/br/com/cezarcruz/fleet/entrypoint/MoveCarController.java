@@ -10,7 +10,7 @@ import br.com.cezarcruz.fleet.entrypoint.response.CarResponse;
 import br.com.cezarcruz.fleet.entrypoint.validator.MoveCarValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,14 +24,14 @@ public class MoveCarController {
   private final CarMapper carMapper;
   private final MoveCarValidator carValidator;
 
-  @PostMapping("/move")
+  @PutMapping("/move")
   public ResponseEntity<CarResponse> moveTo(@RequestBody final MoveCarRequest moveCarRequest) {
 
     carValidator.validate(moveCarRequest)
         .isInvalidThrow(ValidateException.class);
 
     final CarModel movedCar =
-        moveCarUseCase.execute(moveCarRequest.getCarPlate(), moveCarRequest.getPlaceId());
+        moveCarUseCase.execute(carMapper.from(moveCarRequest));
 
     final CarResponse carResponse = carMapper.from(movedCar);
 
