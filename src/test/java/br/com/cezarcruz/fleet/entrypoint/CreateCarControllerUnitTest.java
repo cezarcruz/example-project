@@ -98,7 +98,11 @@ class CreateCarControllerUnitTest {
     final CarRequest carRequest = CarRequestFixture.getValidCarRequest();
 
     when(createCarUseCase.create(any(CarModel.class)))
-        .thenAnswer(a -> ((CarModel) a.getArgument(0)).toBuilder().status(CarStatus.CREATED).build());
+        .thenAnswer(a -> {
+          final CarModel argument = a.getArgument(0);
+          argument.setStatus(CarStatus.CREATED);
+          return argument;
+        });
 
     final ResponseEntity<CarResponse> carResponseResponseEntity
         = createCarController.create(carRequest);

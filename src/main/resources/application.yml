@@ -8,19 +8,19 @@ spring:
     timeout: 20m
     jdbc:
       initialize-schema: always
-#  datasource:
-#    type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://localhost:3306/fleet3?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-#    username: root
-#    password: root
-#    hikari:
-#      poolName: Hikari
-#      auto-commit: false
-#      data-source-properties:
-#        cachePrepStmts: true
-#        prepStmtCacheSize: 250
-#        prepStmtCacheSqlLimit: 2048
-#        useServerPrepStmts: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/fleet3?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
   jpa:
     show-sql: false
     generate-ddl: true

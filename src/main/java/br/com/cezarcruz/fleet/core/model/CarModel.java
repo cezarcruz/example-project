@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
@@ -13,10 +14,12 @@ import lombok.ToString;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 public class CarModel {
   private Long id;
   private String plate;
   private Integer mileage;
   private String model;
+  private PlaceModel actualPlace;
   private CarStatus status;
 }

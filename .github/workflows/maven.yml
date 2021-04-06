@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -44,7 +42,6 @@ jobs:
           git commit -m "coverage badge"
           git push
         fi
-
     - name: Upload JaCoCo coverage report
       uses: actions/upload-artifact@v2
       with:

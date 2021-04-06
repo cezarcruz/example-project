@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "car_entity")
+@Builder(toBuilder = true)
 public class CarEntity {
 
   @Id
@@ -27,4 +31,8 @@ public class CarEntity {
   private String model;
 
   private String status;
+
+  @OneToOne
+  @JoinColumn(name = "actual_place")
+  private PlaceEntity actualPlace;
 }
