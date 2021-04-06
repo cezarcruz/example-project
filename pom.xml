@@ -32,7 +32,7 @@
     <sonar.coverage.exclusions>
       **/*Mapper*,
       **/*FleetApplication.java,
-      br/com/cezarcruz/fleet/aop/*
+      **/br/com/cezarcruz/fleet/aop/*
     </sonar.coverage.exclusions>
 
   </properties>
