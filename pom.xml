@@ -24,6 +24,12 @@
     <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     <java-fluent-validator.version>1.9.3</java-fluent-validator.version>
     <fixture-factory.version>3.1.0</fixture-factory.version>
+
+    <!-- Sonar -->
+    <sonar.projectKey>cezarcruz_example-project</sonar.projectKey>
+    <sonar.organization>cezarcruz</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
   </properties>
 
   <dependencies>
