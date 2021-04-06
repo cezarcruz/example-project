@@ -1,4 +1,5 @@
-![Coverage](.github/badges/jacoco.svg)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cezarcruz_example-project&metric=coverage)](https://sonarcloud.io/dashboard?id=cezarcruz_example-project)
 
 Esse projeto contem exemplos uteis para o dia a dia.
 
