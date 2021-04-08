@@ -21,8 +21,8 @@ public class MoveCarValidator extends AbstractValidator<MoveCarRequest> {
 
     ruleFor(MoveCarRequest::getPlaceId)
         .must(not(nullValue()))
-        .withMessage("place id must be not null")
-        .withFieldName("place_id")
+          .withMessage("place id must be not null")
+          .withFieldName("place_id")
         .critical();
 
   }
