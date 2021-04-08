@@ -2,7 +2,6 @@ package br.com.cezarcruz.fleet.core.usecase;
 
 import br.com.cezarcruz.fleet.core.model.CarModel;
 import br.com.cezarcruz.fleet.core.model.CarStatus;
-import br.com.cezarcruz.fleet.gateway.GetCarGateway;
 import br.com.cezarcruz.fleet.gateway.MoveCarGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,21 +11,14 @@ import org.springframework.stereotype.Service;
 public class MoveCarUseCase {
 
   private final MoveCarGateway moveCarGateway;
-  private final GetCarGateway getCarGateway;
 
   public CarModel execute(final CarModel carModel) {
 
-    final CarModel internalCar = getCarGateway.get(carModel.getPlate());
+    final CarModel activeCar = carModel.toBuilder()
+        .status(CarStatus.ACTIVE)
+        .build();
 
-    if (CarStatus.CREATED.equals(internalCar.getStatus())) {
-      final CarModel activeCar = carModel.toBuilder()
-          .status(CarStatus.ACTIVE)
-          .build();
-
-      return moveCarGateway.move(activeCar);
-    }
-
-    return moveCarGateway.move(carModel);
+    return moveCarGateway.move(activeCar);
 
   }
 
