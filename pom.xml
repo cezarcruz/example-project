@@ -140,7 +140,6 @@
       <artifactId>spring-cloud-starter-sleuth</artifactId>
     </dependency>
 
-
   </dependencies>
   <dependencyManagement>
     <dependencies>
