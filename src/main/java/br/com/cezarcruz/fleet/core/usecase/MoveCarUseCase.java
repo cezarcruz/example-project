@@ -3,11 +3,11 @@ package br.com.cezarcruz.fleet.core.usecase;
 import br.com.cezarcruz.fleet.core.model.CarModel;
 import br.com.cezarcruz.fleet.core.model.CarStatus;
 import br.com.cezarcruz.fleet.gateway.MoveCarGateway;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MoveCarUseCase {
 
   private final MoveCarGateway moveCarGateway;

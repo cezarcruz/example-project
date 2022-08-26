@@ -1,15 +1,15 @@
 package br.com.cezarcruz.fleet.core.usecase;
 
-import br.com.cezarcruz.fleet.gateway.CreateAddressGateway;
-import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
 import br.com.cezarcruz.fleet.core.model.AddressModel;
 import br.com.cezarcruz.fleet.core.model.PlaceModel;
-import lombok.AllArgsConstructor;
+import br.com.cezarcruz.fleet.gateway.CreateAddressGateway;
+import br.com.cezarcruz.fleet.gateway.CreatePlaceGateway;
+import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreatePlaceUseCase {
 
   private final GetAddressUseCase getAddressUseCase;
